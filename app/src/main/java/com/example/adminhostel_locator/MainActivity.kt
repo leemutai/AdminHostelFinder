@@ -16,5 +16,19 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AddPropertyActivity::class.java)
             startActivity(intent)
         }
+        binding.allPropertyListing.setOnClickListener {
+            val intent = Intent(this, AllPropertyActivity::class.java)
+            startActivity(intent)
+        }
+        binding.bookingStatusButton.setOnClickListener {
+            val intent = Intent(this,BookingStatusActivity::class.java)
+            startActivity(intent)
+
+        }
+        binding.profile.setOnClickListener {
+            val intent = Intent(this,AdminProfileActivity::class.java)
+            startActivity(intent)
+
+        }
     }
 }

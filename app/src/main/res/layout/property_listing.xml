@@ -9,7 +9,7 @@
     android:padding="10dp">
 
     <ImageView
-        android:id="@+id/listingsImage"
+        android:id="@+id/listingsImageTv"
         android:layout_width="96dp"
         android:layout_height="104dp"
         android:layout_marginStart="10dp"
@@ -55,7 +55,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/listingsRating"
+                    android:id="@+id/listingsRatingTv"
                     style="@android:style/TextAppearance.Small"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/listingsHseType"
+                android:id="@+id/listingsHseTypeTv"
                 style="@style/Widget.AppCompat.TextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/listingsApartName"
+            android:id="@+id/listingsApartNameTv"
             style="@android:style/TextAppearance.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                 />
 
             <TextView
-                android:id="@+id/listingsLocation"
+                android:id="@+id/listingsLocationTv"
                 style="@android:style/TextAppearance.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
                 />
 
             <TextView
-                android:id="@+id/listingsHseSize"
+                android:id="@+id/listingsHseSizeTv"
                 style="@android:style/TextAppearance.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -171,7 +171,7 @@
                 />
 
             <TextView
-                android:id="@+id/listingsBedSize"
+                android:id="@+id/listingsBedSizeTv"
                 style="@android:style/TextAppearance.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
                 android:text="3.0" />
 
             <TextView
-                android:id="@+id/listingsPrice"
+                android:id="@+id/listingsPriceTv"
                 style="@android:style/TextAppearance.Medium"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
