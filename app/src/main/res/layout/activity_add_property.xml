@@ -6,22 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".AddItemActivity">
+    tools:context=".AddPropertyActivity">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/addPropertyButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageButton
                 android:id="@+id/backButton"
@@ -42,17 +41,17 @@
                 android:fontFamily="@font/yeon_sung"
                 android:text="Add Property"
                 android:textColor="@color/black"
-                android:textSize="40sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/backButton"
                 app:layout_constraintTop_toTopOf="@+id/backButton" />
 
             <EditText
-                android:id="@+id/foodName"
+                android:id="@+id/listingName"
                 android:layout_width="0dp"
                 android:layout_height="57dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/edittextshape"
                 android:elevation="5dp"
@@ -63,11 +62,12 @@
                 android:paddingLeft="15dp"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
             <EditText
-                android:id="@+id/foodPrice"
+                android:id="@+id/listingPrice"
                 android:layout_width="0dp"
                 android:layout_height="57dp"
                 android:layout_marginTop="24dp"
@@ -79,9 +79,9 @@
                 android:outlineSpotShadowColor="@color/textColor"
                 android:paddingLeft="15dp"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/foodName"
-                app:layout_constraintStart_toStartOf="@+id/foodName"
-                app:layout_constraintTop_toBottomOf="@+id/foodName" />
+                app:layout_constraintEnd_toEndOf="@+id/listingName"
+                app:layout_constraintStart_toStartOf="@+id/listingName"
+                app:layout_constraintTop_toBottomOf="@+id/listingName" />
 
             <TextView
                 android:id="@+id/selectImage"
@@ -95,9 +95,9 @@
                 android:paddingLeft="15dp"
                 android:text="Select Image"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="@+id/foodPrice"
-                app:layout_constraintStart_toStartOf="@+id/foodPrice"
-                app:layout_constraintTop_toBottomOf="@+id/foodPrice" />
+                app:layout_constraintEnd_toEndOf="@+id/listingPrice"
+                app:layout_constraintStart_toStartOf="@+id/listingPrice"
+                app:layout_constraintTop_toBottomOf="@+id/listingPrice" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView8"
@@ -112,7 +112,7 @@
                 <ImageView
                     android:id="@+id/selectedImage"
                     android:layout_width="175dp"
-                    android:layout_height="110dp"
+                    android:layout_height="51dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/hostel" />
             </androidx.cardview.widget.CardView>
@@ -128,20 +128,20 @@
                 android:fontFamily="@font/yeon_sung"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
-                android:text="Short Decription"
+                android:text="Rating"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/selectImage"
                 app:layout_constraintTop_toBottomOf="@id/cardView8" />
 
             <EditText
-                android:id="@+id/description"
+                android:id="@+id/listingRating"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:background="@color/white"
                 android:fontFamily="@font/lato_bold"
-                android:hint="Add description here"
+                android:hint="Add Rating here"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@+id/textView13"
                 app:layout_constraintStart_toStartOf="@+id/textView13"
@@ -158,81 +158,98 @@
                 android:fontFamily="@font/yeon_sung"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
-                android:text="Ingredients"
+                android:text="Location"
                 android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="@+id/description"
-                app:layout_constraintStart_toStartOf="@+id/description"
-                app:layout_constraintTop_toBottomOf="@id/description" />
+                app:layout_constraintEnd_toEndOf="@+id/listingRating"
+                app:layout_constraintStart_toStartOf="@+id/listingRating"
+                app:layout_constraintTop_toBottomOf="@id/listingRating" />
 
             <EditText
-                android:id="@+id/ingredient"
+                android:id="@+id/listingLocation"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@color/white"
                 android:fontFamily="@font/lato_bold"
-                android:hint="Add Ingredients Here"
-                app:layout_constraintEnd_toEndOf="@+id/cardView8"
+                android:hint="Add Location Here"
+                app:layout_constraintEnd_toEndOf="@+id/textView14"
                 app:layout_constraintStart_toStartOf="@+id/textView14"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/AddItemButton"
-                android:layout_width="157dp"
-                android:layout_height="57dp"
-                android:background="@drawable/greenbuttonshape"
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/edittextshape"
                 android:fontFamily="@font/yeon_sung"
-                android:text="Add Property"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ingredient" />
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="HouseType"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/listingLocation"
+                app:layout_constraintStart_toStartOf="@+id/listingLocation"
+                app:layout_constraintTop_toBottomOf="@id/listingLocation" />
+
+            <EditText
+                android:id="@+id/listingHseType"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:fontFamily="@font/lato_bold"
+                android:hint="Add HseType Here"
+                app:layout_constraintEnd_toEndOf="@+id/textView20"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/edittextshape"
+                android:fontFamily="@font/yeon_sung"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="Bedsize"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="@+id/listingHseType"
+                app:layout_constraintStart_toStartOf="@+id/listingHseType"
+                app:layout_constraintTop_toBottomOf="@id/listingHseType" />
+
+            <EditText
+                android:id="@+id/listingBedsize"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:fontFamily="@font/lato_bold"
+                android:hint="Add Bedsize Here"
+                app:layout_constraintEnd_toEndOf="@+id/textView21"
+                app:layout_constraintStart_toStartOf="@+id/textView21"
+                app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addPropertyButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/greenbutton"
+        android:fontFamily="@font/yeon_sung"
+        android:text="Add Property"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
