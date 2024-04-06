@@ -1,20 +1,25 @@
 package com.example.adminhostel_locator.adapter
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.textclassifier.ConversationActions.Message
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.adminhostel_locator.databinding.PendingBookingPropertyBinding
 
 class PendingBookingAdapter(
-    private val customerNames: ArrayList<String>,
-    private val listingPrice: ArrayList<String>,
-    private val listingImage: ArrayList<Int>,
-    private val context: Context
+    private val context: Context,
+    private val customerNames: MutableList<String>,
+    private val listingPrice: MutableList<String>,
+    private val listingImages: MutableList<String>,
+    private val itemClicked: OnItemClickLed,
 ) : RecyclerView.Adapter<PendingBookingAdapter.PendingViewHolder>() {
-
+    interface  OnItemClickLed{
+        fun onItemClickListener(position: Int)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PendingViewHolder {
         val binding = PendingBookingPropertyBinding.inflate(
@@ -25,20 +30,28 @@ class PendingBookingAdapter(
         return PendingViewHolder(binding)
     }
 
-
     override fun onBindViewHolder(holder: PendingViewHolder, position: Int) {
         holder.bind(position)
     }
 
     override fun getItemCount(): Int = customerNames.size
+
     inner class PendingViewHolder(private val binding: PendingBookingPropertyBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private var isAccepted = false
+
         fun bind(position: Int) {
             binding.apply {
-                customerName.text = customerNames[position]
-                pendingPropertyPrice.text = listingPrice[position]
-                bookedPropertyImage.setImageResource(listingImage[position])
+                if (position < customerNames.size && position < listingPrice.size && position < listingImages.size) {
+                    customerName.text = customerNames[position]
+                    listingsPrice.text = listingPrice[position]
+                    val uriString = listingImages[position]
+                    val uri = Uri.parse(uriString)
+                    Glide.with(context).load(uri).into(listingImage)
+                } else {
+                    // Handle the case when lists are empty or out of bounds
+                    // You can set default values or display a placeholder
+                }
 
                 bookingAcceptButton.apply {
                     if (!isAccepted) {
@@ -52,19 +65,24 @@ class PendingBookingAdapter(
                             isAccepted = true
                             showToast("Booking Is accepted")
                         } else {
-                            customerNames.removeAt(adapterPosition)
-                            notifyItemRemoved(adapterPosition)
-                            showToast("House Allocated")
+                            if (adapterPosition != RecyclerView.NO_POSITION) {
+                                customerNames.removeAt(adapterPosition)
+                                listingPrice.removeAt(adapterPosition)
+                                listingImages.removeAt(adapterPosition)
+                                notifyItemRemoved(adapterPosition)
+                                showToast("House Allocated")
+                            }
                         }
                     }
                 }
-
+                itemView.setOnClickListener {
+                    itemClicked.onItemClickListener(position)
+                }
             }
-
         }
+
         private fun showToast(message: String) {
-            Toast.makeText(context,message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         }
-
     }
 }

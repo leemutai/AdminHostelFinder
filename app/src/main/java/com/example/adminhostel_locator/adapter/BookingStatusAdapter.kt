@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.adminhostel_locator.databinding.BookedPropertyBinding
 
-class BookingStatusAdapter(private val customerNames: ArrayList<String>, private val moneyStatus: ArrayList<String>) : RecyclerView.Adapter<BookingStatusAdapter.BookingStatusViewHolder>() {
+class BookingStatusAdapter(
+    private val customerNames: ArrayList<String>,
+    private val moneyStatus: ArrayList<String>,
+) : RecyclerView.Adapter<BookingStatusAdapter.BookingStatusViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookingStatusViewHolder {
-        val binding = BookedPropertyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            BookedPropertyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BookingStatusViewHolder(binding)
     }
 
@@ -20,7 +24,8 @@ class BookingStatusAdapter(private val customerNames: ArrayList<String>, private
 
     override fun getItemCount(): Int = customerNames.size
 
-    inner class BookingStatusViewHolder(private val binding: BookedPropertyBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class BookingStatusViewHolder(private val binding: BookedPropertyBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
 
             binding.apply {
@@ -32,7 +37,8 @@ class BookingStatusAdapter(private val customerNames: ArrayList<String>, private
                     "Cancelled" to Color.RED
                 )
                 statusMoney.setTextColor(colorMap[moneyStatus[position]] ?: Color.BLACK)
-                statusColor.backgroundTintList = ColorStateList.valueOf(colorMap[moneyStatus[position]] ?: Color.BLACK)
+                statusColor.backgroundTintList =
+                    ColorStateList.valueOf(colorMap[moneyStatus[position]] ?: Color.BLACK)
             }
         }
     }

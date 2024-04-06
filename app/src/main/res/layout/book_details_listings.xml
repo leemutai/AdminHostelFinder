@@ -45,7 +45,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/customerName"
+                android:id="@+id/listingsName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -66,7 +66,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/cardView9"
-                app:layout_constraintTop_toBottomOf="@+id/customerName" />
+                app:layout_constraintTop_toBottomOf="@+id/listingsName" />
 
             <TextView
                 android:id="@+id/listingsPrice"
@@ -80,19 +80,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textView16"
                 app:layout_constraintStart_toEndOf="@+id/textView16" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/bookingAcceptButton"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:text="Accept"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:fontFamily="@font/yeon_sung"
-                android:background="@drawable/greenbuttonshape"
-                android:layout_marginRight="24dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
