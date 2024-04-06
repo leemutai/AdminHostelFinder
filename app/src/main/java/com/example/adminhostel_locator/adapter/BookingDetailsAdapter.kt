@@ -10,9 +10,9 @@ import com.example.adminhostel_locator.databinding.BookDetailsListingsBinding
 
 class BookingDetailsAdapter(
     private var context: Context,
-    private var listingNames: MutableList<String>,
-    private var listingPrices: MutableList<String>,
-    private var listingImages: MutableList<String>,
+    private var listingNames: ArrayList<String>,
+    private var listingPrices: ArrayList<String>,
+    private var listingImages: ArrayList<String>,
 ) : RecyclerView.Adapter<BookingDetailsAdapter.BookingDetailsViewHolder>() {
 
 

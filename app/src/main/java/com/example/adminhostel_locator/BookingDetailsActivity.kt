@@ -16,9 +16,9 @@ class BookingDetailsActivity : AppCompatActivity() {
     private var phoneNumber: String?= null
     private var totalPrice: String?= null
 
-    private  var listingNames: MutableList<String> = mutableListOf()
-    private  var listingPrices: MutableList<String> = mutableListOf()
-    private  var listingImages: MutableList<String> = mutableListOf()
+    private  var listingNames: ArrayList<String> = arrayListOf()
+    private  var listingPrices: ArrayList<String> = arrayListOf()
+    private  var listingImages: ArrayList<String> = arrayListOf()
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -30,20 +30,22 @@ class BookingDetailsActivity : AppCompatActivity() {
     }
 
     private fun getDataFromIntent() {
-        val receivedBookingDetails = intent.getParcelableExtra<BookingDetails>("UserBookingDetails")
-        if (receivedBookingDetails !=null ){
-            username = receivedBookingDetails.userName
-            listingNames = receivedBookingDetails.listingNames!!
-            listingImages = receivedBookingDetails.listingImages!!
-            address = receivedBookingDetails.address
-            phoneNumber = receivedBookingDetails.phoneNumber
-            listingPrices = receivedBookingDetails.listingPrices!!
-            totalPrice = receivedBookingDetails.totalPrice
+        val receivedBookingDetails = intent.getSerializableExtra("UserBookingDetails") as BookingDetails
+        receivedBookingDetails?.let {BookingDetails ->
+                username = receivedBookingDetails.userName
+                listingNames = receivedBookingDetails.listingNames as ArrayList<String>
+                listingImages = receivedBookingDetails.listingImages as ArrayList<String>
+                address = receivedBookingDetails.address
+                phoneNumber = receivedBookingDetails.phoneNumber
+                listingPrices = receivedBookingDetails.listingPrices as ArrayList<String>
+                totalPrice = receivedBookingDetails.totalPrice
 
 
-            setUserDetails()
-            setAdapter()
+                setUserDetails()
+                setAdapter()
+
         }
+
     }
 
 

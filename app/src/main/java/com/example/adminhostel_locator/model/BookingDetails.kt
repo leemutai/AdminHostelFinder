@@ -2,8 +2,9 @@ package com.example.adminhostel_locator.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.io.Serializable
 
-class BookingDetails():Parcelable {
+class BookingDetails():Serializable {
     var userUid:String? = null
     var userName:String? = null
     var listingNames:MutableList<String>? = null
@@ -33,12 +34,12 @@ class BookingDetails():Parcelable {
         currentTime = parcel.readLong()
     }
 
-    override fun describeContents(): Int {
+      fun describeContents(): Int {
         TODO("Not yet implemented")
     }
 
-    override fun writeToParcel(p0: Parcel, p1: Int) {
-        TODO("Not yet implemented")
+      fun writeToParcel(p0: Parcel, p1: Int) {
+
     }
 
     companion object CREATOR : Parcelable.Creator<BookingDetails> {

@@ -18,7 +18,7 @@ class PendingBookingActivity : AppCompatActivity() ,PendingBookingAdapter.OnItem
     private var listOfName: MutableList<String> = mutableListOf()
     private var listOfTotalPrice : MutableList<String> = mutableListOf()
     private var listOfImageFirstListingBook:MutableList<String> = mutableListOf()
-    private var listOfBookingListing:MutableList<BookingDetails> = mutableListOf()
+    private var listOfBookingListing:ArrayList<BookingDetails> = arrayListOf()
     private lateinit var database: FirebaseDatabase
     private lateinit var databaseBookingDetails: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
