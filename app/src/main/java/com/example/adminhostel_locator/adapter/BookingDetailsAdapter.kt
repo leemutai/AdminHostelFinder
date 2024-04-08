@@ -17,14 +17,14 @@ class BookingDetailsAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookingDetailsViewHolder {
-         val binding = BookDetailsListingsBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = BookDetailsListingsBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return BookingDetailsViewHolder(binding)
     }
 
 
 
     override fun onBindViewHolder(holder: BookingDetailsViewHolder, position: Int) {
-         holder.bind(position)
+        holder.bind(position)
     }
     override fun getItemCount(): Int = listingNames.size
     inner class BookingDetailsViewHolder(private val binding: BookDetailsListingsBinding) :

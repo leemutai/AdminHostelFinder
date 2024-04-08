@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:fontFamily="@font/yeon_sung"
-                android:text="Name Customer"
+                android:text="Listing Name"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/textView16"
                 app:layout_constraintStart_toEndOf="@+id/cardView9"

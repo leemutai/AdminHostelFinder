@@ -5,11 +5,19 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminhostel_locator.adapter.BookingStatusAdapter
 import com.example.adminhostel_locator.databinding.ActivityBookingStatusBinding
+import com.example.adminhostel_locator.model.BookingDetails
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.getValue
 
 class BookingStatusActivity : AppCompatActivity() {
     private val binding: ActivityBookingStatusBinding by lazy {
         ActivityBookingStatusBinding.inflate(layoutInflater)
     }
+    private lateinit var database: FirebaseDatabase
+    private  var listOfCompletedBookingList: ArrayList<BookingDetails> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,10 +25,56 @@ class BookingStatusActivity : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             finish()
         }
+        //retrieve and display display compled booking
+        retrieveCompletedBookingDetail()
 
-        val customerName = arrayListOf("Joh Doe", "Visha Kumar", "Stacy Perks")
-        val bookingStatus = arrayListOf("Approved", "Pending", "Cancelled")
-        val adapter = BookingStatusAdapter(customerName, bookingStatus)
+
+
+    }
+
+    private fun retrieveCompletedBookingDetail() {
+        // initialize firebase databse
+        database = FirebaseDatabase.getInstance()
+        val completedBookingReference = database.reference.child("CompletedBooking")
+            .orderByChild("CurrentTime")
+        completedBookingReference.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                //clear the list before populatig it with data
+                listOfCompletedBookingList.clear()
+
+
+                for (bookingSnapshot in snapshot.children){
+                    val completeBooking = bookingSnapshot.getValue(BookingDetails::class.java)
+                    completeBooking?.let {
+                        listOfCompletedBookingList.add(it)
+                    }
+
+                }
+                //reverse the list to display latest booking first
+                listOfCompletedBookingList.reverse()
+
+                setDataIntoRecyclerView()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+    }
+
+    private fun setDataIntoRecyclerView() {
+        //initialize list to hold customers name and payment statis
+        val customerName = mutableListOf<String>()
+        val moneyStatus = mutableListOf<Boolean>()
+
+        for (booking in listOfCompletedBookingList){
+            booking.userName?.let {
+                customerName.add(it)
+            }
+            moneyStatus.add(booking.paymentReceived)
+        }
+        val adapter = BookingStatusAdapter(customerName,moneyStatus)
         binding.bookingStatusRecyclerView.adapter = adapter
         binding.bookingStatusRecyclerView.layoutManager = LinearLayoutManager(this)
     }

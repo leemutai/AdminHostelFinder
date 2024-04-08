@@ -19,30 +19,30 @@ class BookingDetailsActivity : AppCompatActivity() {
     private  var listingNames: ArrayList<String> = arrayListOf()
     private  var listingPrices: ArrayList<String> = arrayListOf()
     private  var listingImages: ArrayList<String> = arrayListOf()
-     override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-         binding.backButton.setOnClickListener {
-             finish()
-         }
-         getDataFromIntent()
+        binding.backButton.setOnClickListener {
+            finish()
+        }
+        getDataFromIntent()
     }
 
     private fun getDataFromIntent() {
         val receivedBookingDetails = intent.getSerializableExtra("UserBookingDetails") as BookingDetails
         receivedBookingDetails?.let {BookingDetails ->
-                username = receivedBookingDetails.userName
-                listingNames = receivedBookingDetails.listingNames as ArrayList<String>
-                listingImages = receivedBookingDetails.listingImages as ArrayList<String>
-                address = receivedBookingDetails.address
-                phoneNumber = receivedBookingDetails.phoneNumber
-                listingPrices = receivedBookingDetails.listingPrices as ArrayList<String>
-                totalPrice = receivedBookingDetails.totalPrice
+            username = receivedBookingDetails.userName
+            listingNames = receivedBookingDetails.listingNames as ArrayList<String>
+            listingImages = receivedBookingDetails.listingImages as ArrayList<String>
+            address = receivedBookingDetails.address
+            phoneNumber = receivedBookingDetails.phoneNumber
+            listingPrices = receivedBookingDetails.listingPrices as ArrayList<String>
+            totalPrice = receivedBookingDetails.totalPrice
 
 
-                setUserDetails()
-                setAdapter()
+            setUserDetails()
+            setAdapter()
 
         }
 

@@ -1,10 +1,10 @@
+// PendingBookingAdapter.kt
 package com.example.adminhostel_locator.adapter
 
 import android.content.Context
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,8 +17,10 @@ class PendingBookingAdapter(
     private val listingImages: MutableList<String>,
     private val itemClicked: OnItemClickLed,
 ) : RecyclerView.Adapter<PendingBookingAdapter.PendingViewHolder>() {
-    interface  OnItemClickLed{
+    interface OnItemClickLed {
         fun onItemClickListener(position: Int)
+        fun onItemAcceptClickListener(position: Int)
+        fun onItemAllocatedClickListener(position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PendingViewHolder {
@@ -64,13 +66,19 @@ class PendingBookingAdapter(
                             text = "Allocated"
                             isAccepted = true
                             showToast("Booking Is accepted")
+                            if (adapterPosition != RecyclerView.NO_POSITION) {
+                                itemClicked.onItemAcceptClickListener(adapterPosition)
+                            }
                         } else {
                             if (adapterPosition != RecyclerView.NO_POSITION) {
-                                customerNames.removeAt(adapterPosition)
-                                listingPrice.removeAt(adapterPosition)
-                                listingImages.removeAt(adapterPosition)
-                                notifyItemRemoved(adapterPosition)
-                                showToast("House Allocated")
+                                if (customerNames.size > adapterPosition && listingPrice.size > adapterPosition && listingImages.size > adapterPosition) {
+                                    customerNames.removeAt(adapterPosition)
+                                    listingPrice.removeAt(adapterPosition)
+                                    listingImages.removeAt(adapterPosition)
+                                    notifyItemRemoved(adapterPosition)
+                                    showToast("House Allocated")
+                                    itemClicked.onItemAllocatedClickListener(adapterPosition)
+                                }
                             }
                         }
                     }
