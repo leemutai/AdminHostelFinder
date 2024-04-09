@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.adminhostel_locator.databinding.BookedPropertyBinding
 
 class BookingStatusAdapter(
-    private val customerNames: ArrayList<String>,
-    private val moneyStatus: ArrayList<String>,
+    private val customerNames: MutableList<String>,
+    private val moneyStatus: MutableList<Boolean>,
 ) : RecyclerView.Adapter<BookingStatusAdapter.BookingStatusViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookingStatusViewHolder {
@@ -30,11 +30,15 @@ class BookingStatusAdapter(
 
             binding.apply {
                 customerName.text = customerNames[position]
-                statusMoney.text = moneyStatus[position]
+                if (moneyStatus[position]) {
+                    statusMoney.text = "Approved"
+                } else {
+                    statusMoney.text = "notReceived"
+                }
                 val colorMap = mapOf(
-                    "Approved" to Color.GREEN,
+                    true to Color.GREEN,
+                    false to Color.RED,
                     "Pending" to Color.GRAY,
-                    "Cancelled" to Color.RED
                 )
                 statusMoney.setTextColor(colorMap[moneyStatus[position]] ?: Color.BLACK)
                 statusColor.backgroundTintList =
