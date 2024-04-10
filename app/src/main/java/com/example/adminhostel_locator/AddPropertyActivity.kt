@@ -91,6 +91,7 @@ class AddPropertyActivity : AppCompatActivity() {
                     downloadUrl->
                     //create a new listing property
                     val newListing = AllListings(
+                        newPropertyKey,
                         listingName = listingName,
                         listingPrice = listingPrice,
                         listingRating = listingRating,

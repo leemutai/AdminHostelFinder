@@ -3,6 +3,7 @@ package com.example.adminhostel_locator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.adminhostel_locator.adapter.ListingsPropertyAdapter
 import com.example.adminhostel_locator.databinding.ActivityAllPropertyBinding
@@ -27,19 +28,6 @@ class AllPropertyActivity : AppCompatActivity() {
 
         databaseReference = FirebaseDatabase.getInstance().reference
         retrieveListingsProperty()
-
-//        val listingItemName = listOf("Baraka", "Nyayo", "Phase", "Wema")
-//        val listingItemPrice = listOf("Ksh10000", "Ksh4500", "Ksh7500", "Ksh8000")
-//        val listingRating = listOf("4.9", "3.5", "3.3", "2.0")
-//        val listingLocation = listOf("Kahawa", "Langata", "Westy", "Imara")
-//        val listingHseType = listOf("Apartment", "Studio", "2bd", "3bd")
-//        val listingBed = listOf("3.0", "1.0", "2.0", "3.0")
-//        val listingImage = listOf(
-//            R.drawable.hostel,
-//            R.drawable.hostel2,
-//            R.drawable.hostel,
-//            R.drawable.hostel2,
-//        )
         binding.backButton.setOnClickListener {
             finish()
         }
@@ -72,8 +60,26 @@ class AllPropertyActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        val adapter = ListingsPropertyAdapter(this@AllPropertyActivity,listingsPropertys,databaseReference)
+
+        val adapter = ListingsPropertyAdapter(this@AllPropertyActivity,listingsPropertys,databaseReference){position ->
+          deleteListingProperties(position)
+        }
+
         binding.ListingsRecylerView.layoutManager = LinearLayoutManager(this)
         binding.ListingsRecylerView.adapter = adapter
+    }
+
+    private fun deleteListingProperties(position: Int) {
+        val listingPropertyToDelete = listingsPropertys[position]
+        val listingPropertyKey = listingPropertyToDelete.key
+        val listingNameReference = database.reference.child("listing").child(listingPropertyKey!!)
+        listingNameReference.removeValue().addOnCompleteListener { task ->
+            if (task.isSuccessful){
+                listingsPropertys.removeAt(position)
+                binding.ListingsRecylerView.adapter?.notifyItemRemoved(position)
+            }else{
+                Toast.makeText(this, "Listing Not deleted", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }

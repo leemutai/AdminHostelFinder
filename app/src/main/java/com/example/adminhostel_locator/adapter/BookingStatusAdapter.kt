@@ -1,6 +1,5 @@
 package com.example.adminhostel_locator.adapter
 
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -32,17 +31,11 @@ class BookingStatusAdapter(
                 customerName.text = customerNames[position]
                 if (moneyStatus[position]) {
                     statusMoney.text = "Approved"
+                    statusColor.setCardBackgroundColor(Color.GREEN)
                 } else {
-                    statusMoney.text = "notReceived"
+                    statusMoney.text = "Not Received"
+                    statusColor.setCardBackgroundColor(Color.RED)
                 }
-                val colorMap = mapOf(
-                    true to Color.GREEN,
-                    false to Color.RED,
-                    "Pending" to Color.GRAY,
-                )
-                statusMoney.setTextColor(colorMap[moneyStatus[position]] ?: Color.BLACK)
-                statusColor.backgroundTintList =
-                    ColorStateList.valueOf(colorMap[moneyStatus[position]] ?: Color.BLACK)
             }
         }
     }

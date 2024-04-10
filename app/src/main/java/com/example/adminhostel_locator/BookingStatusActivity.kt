@@ -10,7 +10,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.getValue
 
 class BookingStatusActivity : AppCompatActivity() {
     private val binding: ActivityBookingStatusBinding by lazy {
@@ -25,30 +24,25 @@ class BookingStatusActivity : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             finish()
         }
-        //retrieve and display display compled booking
+        //retrieve and display completed booking
         retrieveCompletedBookingDetail()
-
-
-
     }
 
     private fun retrieveCompletedBookingDetail() {
-        // initialize firebase databse
+        // initialize firebase database
         database = FirebaseDatabase.getInstance()
         val completedBookingReference = database.reference.child("CompletedBooking")
             .orderByChild("CurrentTime")
         completedBookingReference.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                //clear the list before populatig it with data
+                //clear the list before populating it with data
                 listOfCompletedBookingList.clear()
-
 
                 for (bookingSnapshot in snapshot.children){
                     val completeBooking = bookingSnapshot.getValue(BookingDetails::class.java)
                     completeBooking?.let {
                         listOfCompletedBookingList.add(it)
                     }
-
                 }
                 //reverse the list to display latest booking first
                 listOfCompletedBookingList.reverse()
@@ -64,7 +58,7 @@ class BookingStatusActivity : AppCompatActivity() {
     }
 
     private fun setDataIntoRecyclerView() {
-        //initialize list to hold customers name and payment statis
+        //initialize list to hold customers' names and payment status
         val customerName = mutableListOf<String>()
         val moneyStatus = mutableListOf<Boolean>()
 
